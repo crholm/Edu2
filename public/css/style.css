@@ -80,13 +80,27 @@ body, html{
 
 }
 
+h1 {
+    font-size: 30px;
+}
+h2 {
+    font-size: 20px;
+}
+h3 {
+    font-size: 15px;
+}
+h4 {
+    font-size: 14px;
+}
 
-h3{
+
+h1, h2, h3, h4, h5{
     margin-top: 0;
+    text-transform: uppercase;
 }
 
 .box{
-    padding: 0px 0px 5px 5px;
+    padding: 0px 0px 15px 15px;
     border-color: #dadada;
     border-style: solid;
     border-width: 1px;

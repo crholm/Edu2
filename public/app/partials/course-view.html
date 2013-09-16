@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="span12" >
-            <h1>{{ university }} &gt; {{ course }}</h1>
+            <h1>{{ course.university }} &gt; {{ course.code }}</h1>
 
         </div>
 
@@ -11,13 +11,16 @@
     <div class="row">
         <div class="span3" >
             <div class="box">
-                <h5>LINEAR ALGEBRA</h5>
+                <h2>{{ course.name }}</h2>
+                <p ng-repeat="module in modules"><a href="" ng-click="setModule(module)">{{ module.title }}</a></p>
             </div>
+
         </div>
 
         <div class="span9 " >
             <div class="box">
-                <h5>VECTOR ADDITION</h5>
+                <h1>{{ currentModule.title }}</h1>
+                <span mathjax-bind="currentModule.content"></span>
             </div>
         </div>
     </div>
