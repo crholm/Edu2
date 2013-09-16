@@ -13,18 +13,18 @@ var Modules = {
         title:"What is a system of linear equations?",
         content:
                 "In mathematics, a system of linear equations (or linear system) is a collection of linear equations involving the same set of variables. For example, <br>" +
-                "$$\\begin{align*}" +
-                " 3&x &+ 3&y &-   &z  &= &&1\\\\ " +
-                " 2&x &+ 2&y &+  4&z  &= &&-2\\\\ " +
-                " -&x &+ \\tfrac{1}{2}&y  &-   &z  &= &&0" +
-                "\\end{align*}$$" +
+                "$$\\begin{array}1" +
+                    "\\ 3x  +  \\ 2y            - \\ \\ z               &= \\ \\ \\ 1\\  \\\\" +
+                    "\\ 2x  -  \\ 2y            + 4z              &=  -2  \\\\" +
+                    "-x  +  \\tfrac{1}{2}y - \\ \\ z               &= \\ \\ \\ 0 " +
+                    "\\end{array}$$" +
 
                 "is a system of three equations in the three variables x, y, z. A solution to a linear system is an assignment of numbers to the variables such that all the " +
                 "equations are simultaneously satisfied. A solution to the system above is given by <br>" +
                 "$$\\begin{align*}" +
-                "x &= & 1&\\\\" +
-                "y &= &-2&\\\\" +
-                "z &= &-2& " +
+                "x &=  \\ \\ \\ 1\\\\" +
+                "y &= -2\\\\" +
+                "z &= -2 " +
                 "\\end{align*}$$" +
                 "since it makes all three equations valid.The word \"system\" indicates that the " +
                 "equations are to be considered collectively, rather than individually."
