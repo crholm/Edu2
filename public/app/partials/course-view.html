@@ -10,17 +10,50 @@
 
     <div class="row">
         <div class="span3" >
-            <div class="box">
+            <div class="">
                 <h2>{{ course.name }}</h2>
-                <p ng-repeat="module in modules"><a href="" ng-click="setModule(module)">{{ module.title }}</a></p>
+
+
+                <accordion close-others="true">
+                    <accordion-group heading="{{section.name}}" ng-repeat="section in sections" style="margin-right: 15px">
+                        <ul>
+                            <li ng-repeat="chapter in section.chapters"><a href="" ng-click="showChapter(chapter)">{{ chapter.name }}</a></li>
+                        </ul>
+                    </accordion-group>
+                </accordion>
+
+
             </div>
 
         </div>
 
         <div class="span9 " >
-            <div class="box">
-                <h1>{{ currentModule.title }}</h1>
-                <span mathjax-bind="currentModule.content"></span>
+            <div class="">
+                <h1>{{ currentChapter.name }}</h1>
+
+                <accordion close-others="true">
+
+
+                        <accordion-group  ng-repeat="module in currentChapter.modules" ng-repeat="section in sections" style="margin-right: 15px">
+
+                            <accordion-heading>
+                                <h3>{{ getModuleName(module) }}</h3>
+                            </accordion-heading>
+
+                            <span mathjax-bind="getModuleContent(module)"></span>
+
+
+                        </accordion-group>
+
+
+
+
+
+                </accordion>
+
+
+
+
             </div>
         </div>
     </div>

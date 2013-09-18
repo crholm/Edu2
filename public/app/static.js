@@ -3,10 +3,43 @@ var Course = {
         name: "LINEAR ALGEBRA",
         code: "TATA31",
         university: "LiU",
-        modules: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12]
+
+        sections: [
+            {
+                name: "Introduction",
+                chapters: [
+                    {
+                        name: "Linear equations",
+                        modules:[1, 2, 3]
+                    }
+
+                ]
+            },
+            {
+                name: "Vectors",
+                chapters: [
+                    {
+                        name: "Basics",
+                        modules:[4, 5, 6, 7]
+                    },
+                    {
+                        name: "Vector Addition",
+                        modules: [8, 9]
+                    },
+                    {
+                        name: "Scalar Multiplication",
+                        modules: [10, 11, 12]
+                    }
+                ]
+            }
+        ]
+
+
+//        modules: [1, 2, 3, 4, 6, 7, 8, 9, 10, 11, 12]
 
     }
 }
+
 
 var Modules = {
     1:{
