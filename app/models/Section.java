@@ -1,0 +1,67 @@
+package models;
+
+import com.avaje.ebean.validation.NotNull;
+import models.helpers.JsonModel;
+import play.db.ebean.Model;
+
+import javax.persistence.*;
+import java.util.List;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: raz
+ * Date: 9/19/13
+ * Time: 3:56 PM
+ * To change this template use File | Settings | File Templates.
+ */
+@Entity
+public class Section extends JsonModel {
+
+    public static Finder<Long,Section> find = new Finder<>(Long.class, Section.class);
+
+    @Id
+    private long id;
+
+    @NotNull
+    private String title;
+
+    private int sectionOrder;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Chapter> chapters;
+
+
+    public int getSectionOrder() {
+        return sectionOrder;
+    }
+
+    public void setSectionOrder(int sectionOrder) {
+        this.sectionOrder = sectionOrder;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public List<Chapter> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(List<Chapter> chapters) {
+        this.chapters = chapters;
+    }
+
+
+}

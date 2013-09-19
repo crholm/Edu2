@@ -1,0 +1,23 @@
+%YAML 1.1
+---
+# edu2.course
+-
+  id: 4
+  university_id: 4
+  course_code: "TATA31"
+  title: "da"
+# edu2.play_evolutions
+-
+  id: 1
+  hash: "13fe5b20f3acf4b1f5984d1bd7f4c3e1911f5207"
+  applied_at: "2013-09-19 21:26:53"
+  apply_script: "create table chapter (\nid                        bigint auto_increment not null,\nsection_id                bigint not null,\ntitle                     varchar(255) not null,\nchapter_order             integer,\nconstraint pk_chapter primary key (id))\n;\n\ncreate table chapter_to_module (\nchapter_id                bigint not null,\nmodule_id                 bigint,\nmodule_order              integer)\n;\n\ncreate table course (\nid                        bigint auto_increment not null,\nuniversity_id             bigint not null,\ncourse_code               varchar(255),\ntitle                     varchar(255),\nconstraint pk_course primary key (id))\n;\n\ncreate table module (\nid                        bigint auto_increment not null,\ntitle                     varchar(255) not null,\ncontent                   varchar(255) not null,\nconstraint pk_module primary key (id))\n;\n\ncreate table section (\nid                        bigint auto_increment not null,\ncourse_id                 bigint not null,\ntitle                     varchar(255) not null,\nsection_order             integer,\nconstraint pk_section primary key (id))\n;\n\ncreate table university (\nid                        bigint auto_increment not null,\nname                      varchar(255) not null,\nshort_name                varchar(255),\nconstraint pk_university primary key (id))\n;\n\nalter table chapter add constraint fk_chapter_section_1 foreign key (section_id) references section (id) on delete restrict on update restrict;\ncreate index ix_chapter_section_1 on chapter (section_id);\nalter table chapter_to_module add constraint fk_chapter_to_module_chapter_2 foreign key (chapter_id) references chapter (id) on delete restrict on update restrict;\ncreate index ix_chapter_to_module_chapter_2 on chapter_to_module (chapter_id);\nalter table course add constraint fk_course_university_3 foreign key (university_id) references university (id) on delete restrict on update restrict;\ncreate index ix_course_university_3 on course (university_id);\nalter table section add constraint fk_section_course_4 foreign key (course_id) references course (id) on delete restrict on update restrict;\ncreate index ix_section_course_4 on section (course_id);"
+  revert_script: "SET FOREIGN_KEY_CHECKS=0;\n\ndrop table chapter;\n\ndrop table chapter_to_module;\n\ndrop table course;\n\ndrop table module;\n\ndrop table section;\n\ndrop table university;\n\nSET FOREIGN_KEY_CHECKS=1;"
+  state: "applied"
+  last_problem: ""
+# edu2.university
+-
+  id: 4
+  name: "Linköpings University"
+  short_name: "LiU"
+...

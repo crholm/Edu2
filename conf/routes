@@ -3,8 +3,14 @@
 # ~~~~
 
 # Home page
-GET     /api                           controllers.Application.index()
+GET         /api                    controllers.Application.index()
+
+GET         /api/modules            controllers.ApiModule.findAll()
+GET         /api/modules/:id        controllers.ApiModule.find(id: Long)
+POST        /api/modules            controllers.ApiModule.save()
+PUT         /api/modules/:id        controllers.ApiModule.update(id: Long)
+DELETE      /api/modules/:id        controllers.ApiModule.delete(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /                    controllers.Assets.at(path="/public", file="index.html")
-GET     /*file               controllers.Assets.at(path="/public", file)
+GET         /                       controllers.Assets.at(path="/public", file="index.html")
+GET         /*file                  controllers.Assets.at(path="/public", file)
