@@ -1,12 +1,10 @@
 package models;
 
 import models.helpers.JsonModel;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +28,12 @@ public class Course extends JsonModel {
 
     private String title;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+    private University university;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Section> sections;
 
 
@@ -58,10 +61,22 @@ public class Course extends JsonModel {
         this.title = title;
     }
 
+    @JsonIgnore
+    public University getUniversity() {
+        return university;
+    }
+
+    @JsonIgnore
+    public void setUniversity(University university) {
+        this.university = university;
+    }
+
+    @JsonIgnore
     public List<Section>  getSections() {
         return sections;
     }
 
+    @JsonIgnore
     public void setSections(List<Section> sections) {
         this.sections = sections;
     }

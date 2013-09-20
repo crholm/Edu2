@@ -2,14 +2,12 @@ package models;
 
 import com.avaje.ebean.validation.NotNull;
 import models.helpers.JsonModel;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Content;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -34,9 +32,9 @@ public class University extends JsonModel{
 
     private String shortName;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Course> courses;
-
 
     public long getId() {
         return id;
@@ -62,10 +60,12 @@ public class University extends JsonModel{
         this.shortName = shortName;
     }
 
+    @JsonIgnore
     public List<Course> getCourses() {
         return courses;
     }
 
+    @JsonIgnore
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }

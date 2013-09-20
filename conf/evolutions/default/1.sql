@@ -5,9 +5,9 @@
 
 create table chapter (
   id                        bigint auto_increment not null,
-  section_id                bigint not null,
   title                     varchar(255) not null,
   chapter_order             integer,
+  section_id                bigint,
   constraint pk_chapter primary key (id))
 ;
 
@@ -19,9 +19,9 @@ create table chapter_to_module (
 
 create table course (
   id                        bigint auto_increment not null,
-  university_id             bigint not null,
   course_code               varchar(255),
   title                     varchar(255),
+  university_id             bigint,
   constraint pk_course primary key (id))
 ;
 
@@ -34,9 +34,9 @@ create table module (
 
 create table section (
   id                        bigint auto_increment not null,
-  course_id                 bigint not null,
   title                     varchar(255) not null,
   section_order             integer,
+  course_id                 bigint,
   constraint pk_section primary key (id))
 ;
 

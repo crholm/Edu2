@@ -28,6 +28,12 @@ public class Chapter extends JsonModel {
 
     private int chapterOrder;
 
+
+    @JsonIgnore
+    @ManyToOne
+    private Section section;
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<ChapterToModule> modules;
 
@@ -48,6 +54,7 @@ public class Chapter extends JsonModel {
         this.title = title;
     }
 
+
     public List<ChapterToModule> getModules() {
         return modules;
     }
@@ -62,5 +69,13 @@ public class Chapter extends JsonModel {
 
     public void setChapterOrder(int chapterOrder) {
         this.chapterOrder = chapterOrder;
+    }
+
+    public Section getSection() {
+        return section;
+    }
+
+    public void setSection(Section section) {
+        this.section = section;
     }
 }

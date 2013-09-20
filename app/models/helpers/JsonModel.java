@@ -1,5 +1,7 @@
 package models.helpers;
 
+import org.codehaus.jackson.JsonNode;
+import play.Logger;
 import play.db.ebean.Model;
 import play.libs.Json;
 import play.mvc.Content;
@@ -30,6 +32,10 @@ public abstract class JsonModel extends Model implements Content {
 
 
     public static <A> A fromJson(Http.Request request, Class<A> aClass ){
+        JsonNode json = request.body().asJson();
+        if(json == null){
+            return null;
+        }
         return Json.fromJson(request.body().asJson(), aClass);
     }
 }

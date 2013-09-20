@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.validation.NotNull;
 import models.helpers.JsonModel;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 
 import javax.persistence.*;
@@ -27,6 +28,11 @@ public class Section extends JsonModel {
 
     private int sectionOrder;
 
+    @JsonIgnore
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Course course;
+
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
@@ -55,10 +61,22 @@ public class Section extends JsonModel {
         this.title = title;
     }
 
+    @JsonIgnore
+    public Course getCourse() {
+        return course;
+    }
+
+    @JsonIgnore
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    @JsonIgnore
     public List<Chapter> getChapters() {
         return chapters;
     }
 
+    @JsonIgnore
     public void setChapters(List<Chapter> chapters) {
         this.chapters = chapters;
     }

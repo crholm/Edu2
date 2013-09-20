@@ -1,5 +1,8 @@
 package controllers;
 
+import com.avaje.ebean.Expr;
+import com.avaje.ebean.Expression;
+import com.avaje.ebean.ExpressionList;
 import controllers.helpers.JsonController;
 import models.Module;
 import models.helpers.JsonModel;
@@ -17,11 +20,11 @@ import java.util.List;
  * Time: 9:56 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ApiModule extends JsonController {
+public class ModuleApi extends JsonController {
 
-    public static Result find(long id){
+    public static Result find(long moduleId){
 
-        Module module = Module.find.byId(id);
+        Module module = Module.find.byId(moduleId);
 
 
         if(module == null){
@@ -30,6 +33,7 @@ public class ApiModule extends JsonController {
 
         return ok(module.body());
     }
+
 
 
     public static Result findAll(){
@@ -53,13 +57,12 @@ public class ApiModule extends JsonController {
         return ok(module);
     }
 
-    public static Result update(long id){
+    public static Result update(long moduleId){
 
         Module module = JsonModel.fromJson(request(), Module.class);
 
-        //Find & merge
 
-        if(module == null || module.getId() != id){
+        if(module == null || module.getId() != moduleId){
             return badRequest();
         }
 
@@ -70,8 +73,8 @@ public class ApiModule extends JsonController {
 
 
 
-    public static Result delete(long id){
-        Module module = Module.find.byId(id);
+    public static Result delete(long moduleId){
+        Module module = Module.find.byId(moduleId);
 
         if(module == null){
             return notFound();
