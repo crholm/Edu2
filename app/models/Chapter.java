@@ -33,7 +33,6 @@ public class Chapter extends JsonModel {
     @ManyToOne
     private Section section;
 
-    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL)
     private List<ChapterToModule> modules;
 

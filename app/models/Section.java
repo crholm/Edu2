@@ -32,7 +32,7 @@ public class Section extends JsonModel {
     @ManyToOne(cascade = CascadeType.ALL)
     private Course course;
 
-    @JsonIgnore
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Chapter> chapters;
 
@@ -71,12 +71,12 @@ public class Section extends JsonModel {
         this.course = course;
     }
 
-    @JsonIgnore
+
     public List<Chapter> getChapters() {
         return chapters;
     }
 
-    @JsonIgnore
+
     public void setChapters(List<Chapter> chapters) {
         this.chapters = chapters;
     }

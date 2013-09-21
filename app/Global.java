@@ -29,21 +29,22 @@ public class Global extends GlobalSettings {
 
 //                @SuppressWarnings("unchecked")
 //                Map<String,List<Object>> all = (Map<String,List<Object>>) Yaml.load("initial-data.yml");
-//
-//                // Insert users first
-//
-//                Logger.debug("Saving default data.");
-//                Ebean.save(all.get("university"));
 
-//                // Insert projects
-//                Ebean.save(all.get("projects"));
-//                for(Object project: all.get("projects")) {
-//                    // Insert the project/user relation
-//                    Ebean.saveManyToManyAssociations(project, "members");
-//                }
+
+//                List<Object> list = (List<Object>) Yaml.load("initial-data.yml");
 //
-//                // Insert tasks
-//                Ebean.save(all.get("tasks"));
+//                Ebean.save(list);
+
+
+//                Logger.debug("Saving default data.");
+//
+//                Ebean.save(all.get("university"));
+//
+//                Ebean.save(all.get("course"));
+//
+//                Ebean.save(all.get("section"));
+
+//                Ebean.save(all.get("module"));
 
             }
         }

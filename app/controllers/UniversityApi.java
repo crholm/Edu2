@@ -1,12 +1,8 @@
 package controllers;
 
 import controllers.helpers.JsonController;
-import models.Course;
 import models.University;
-import play.api.libs.json.Json;
-import play.api.libs.json.Writes;
 import play.mvc.Result;
-
 import java.util.List;
 
 /**

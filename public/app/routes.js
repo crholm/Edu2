@@ -8,7 +8,7 @@ Edu2.config(function($routeProvider) {
         }
     )
         .when(
-        '/uni/:university',
+        '/uni/:universityId',
         {
             controller: 'UniversityCtrl',
             templateUrl:'app/partials/university-view.html'
@@ -17,7 +17,7 @@ Edu2.config(function($routeProvider) {
 
     )
         .when(
-        '/uni/:university/course/:course',
+        '/uni/:universityId/course/:courseId',
         {
             controller: 'CourseCtrl',
             templateUrl:'app/partials/course-view.html'

@@ -1,45 +1,45 @@
-Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams) {
+Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University, Course, Section, Module) {
 
-    $scope.currentChapter = {
 
-    }
+//    console.log(University);
 
-    $scope.currentModule = {
-        title:"",
-        content:""
-    }
 
-    $scope.university = $routeParams.university;
-    $scope.course = Course[$routeParams.course]
 
-    $scope.sections = $scope.course.sections;
+    $scope.currentChapter = {};
+    $scope.currentModules = [];
+
+
+    console.log($routeParams.universityId);
+
+    $scope.university = University.get({id: $routeParams.universityId });
+
+    $scope.course = Course.get({id: $routeParams.courseId, universityId: $routeParams.universityId });
+
+    $scope.sections = Section.query({courseId: $routeParams.courseId, universityId: $routeParams.universityId }, function(data){
+        console.log(data);
+    });
 
     console.log($scope.course);
-    console.log($scope.modules);
+    console.log($scope.university);
+
+
+
+
 
 
     $scope.showChapter = function(chapter){
         $scope.currentChapter = chapter;
-    }
 
-    $scope.getModuleName = function(moduleNr){
-        return Modules[moduleNr].title;
-    }
+        $scope.currentModules = []
+        for(var i = 0; i < chapter.modules.length; i++){
+            var module = Module.get({ id: chapter.modules[i].moduleId });
+            module.$order = chapter.modules[i].moduleOrder;
 
-    $scope.getModuleContent = function(moduleNr){
-        return Modules[moduleNr].content;
-    }
-
-    $scope.setModule = function(module){
-
-        $scope.currentModule = module;
-//        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-//        setTimeout(function(){
-//            console.log("NU!!");
-//            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-//        }, 1000);
+            $scope.currentModules.push(module);
+        }
 
     }
+
 
 });
 

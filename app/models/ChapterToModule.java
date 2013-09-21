@@ -1,12 +1,10 @@
 package models;
 
 import models.helpers.JsonModel;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import play.db.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumns;
+import javax.persistence.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,10 +18,34 @@ public class ChapterToModule extends JsonModel {
 
     public static Finder<Long,ChapterToModule> find = new Finder<>(Long.class, ChapterToModule.class);
 
+    @Id
+    private long id;
+
+    @JsonIgnore
+    @ManyToOne
+    private Chapter chapter;
+
     private long moduleId;
 
     private int moduleOrder;
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+
+    public Chapter getChapter() {
+        return chapter;
+    }
+
+    public void setChapter(Chapter chapter) {
+        this.chapter = chapter;
+    }
 
     public int getModuleOrder() {
         return moduleOrder;
@@ -40,4 +62,5 @@ public class ChapterToModule extends JsonModel {
     public void setModuleId(long moduleId) {
         this.moduleId = moduleId;
     }
+
 }

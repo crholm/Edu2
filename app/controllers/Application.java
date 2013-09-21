@@ -14,37 +14,37 @@ public class Application extends JsonController {
   
     public static Result index() {
 
-        University u = new University();
-
-        u.setName("dfssd");
-
-        u.setShortName("dsf");
-
-        Course c = new Course();
-        c.setTitle("LinAlg");
-        c.setCourseCode("TATA31");
-
-        Section s1 = new Section();
-        s1.setTitle("Test1");
-
-
-        Section s2 = new Section();
-        s2.setTitle("Test2");
-
-
-
-        List<Section> map = new ArrayList<>();
-
-        map.add(s1);
-        map.add(s2);
-
-        c.setSections(map);
-
-        List< Course > l = new ArrayList<>();
-        l.add(c);
-        u.setCourses(l);
-
-        u.save();
+//        University u = new University();
+//
+//        u.setName("dfssd");
+//
+//        u.setShortName("dsf");
+//
+//        Course c = new Course();
+//        c.setTitle("LinAlg");
+//        c.setCourseCode("TATA31");
+//
+//        Section s1 = new Section();
+//        s1.setTitle("Test1");
+//
+//
+//        Section s2 = new Section();
+//        s2.setTitle("Test2");
+//
+//
+//
+//        List<Section> map = new ArrayList<>();
+//
+//        map.add(s1);
+//        map.add(s2);
+//
+//        c.setSections(map);
+//
+//        List< Course > l = new ArrayList<>();
+//        l.add(c);
+//        u.setCourses(l);
+//
+//        u.save();
 
 //        Logger.debug("Hit");
 //

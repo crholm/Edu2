@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="span12" >
-            <h1>{{ course.university }} &gt; {{ course.code }}</h1>
+            <h1>{{ university.name }} &gt; {{ course.courseCode }}</h1>
 
         </div>
 
@@ -11,13 +11,13 @@
     <div class="row">
         <div class="span3" >
             <div class="">
-                <h2>{{ course.name }}</h2>
+                <h2>{{ course.title }}</h2>
 
 
                 <accordion close-others="true">
-                    <accordion-group heading="{{section.name}}" ng-repeat="section in sections" style="margin-right: 15px">
+                    <accordion-group heading="{{section.title}}" ng-repeat="section in sections | orderBy:sectionOrder" style="margin-right: 15px">
                         <ul>
-                            <li ng-repeat="chapter in section.chapters"><a href="" ng-click="showChapter(chapter)">{{ chapter.name }}</a></li>
+                            <li ng-repeat="chapter in section.chapters | orderBy:chapterOrder"><a href="" ng-click="showChapter(chapter)">{{ chapter.title }}</a></li>
                         </ul>
                     </accordion-group>
                 </accordion>
@@ -29,18 +29,18 @@
 
         <div class="span9 " >
             <div class="">
-                <h1>{{ currentChapter.name }}</h1>
+                <h1>{{ currentChapter.title }}</h1>
 
                 <accordion close-others="true">
 
 
-                        <accordion-group  ng-repeat="module in currentChapter.modules" ng-repeat="section in sections" style="margin-right: 15px">
+                        <accordion-group  ng-repeat="module in currentModules | orderBy:$order"  style="margin-right: 15px">
 
                             <accordion-heading>
-                                <h3>{{ getModuleName(module) }}</h3>
+                                <h3>{{ module.title }}</h3>
                             </accordion-heading>
 
-                            <span mathjax-bind="getModuleContent(module)"></span>
+                            <span mathjax-bind="module.content"></span>
 
 
                         </accordion-group>

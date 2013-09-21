@@ -4,8 +4,10 @@ import com.avaje.ebean.validation.NotNull;
 import models.helpers.JsonModel;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +29,7 @@ public class Module extends JsonModel{
     private String title;
 
     @NotNull
+    @Lob
     private String content;
 
     public long getId() {

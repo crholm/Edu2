@@ -12,9 +12,11 @@ create table chapter (
 ;
 
 create table chapter_to_module (
-  chapter_id                bigint not null,
+  id                        bigint auto_increment not null,
+  chapter_id                bigint,
   module_id                 bigint,
-  module_order              integer)
+  module_order              integer,
+  constraint pk_chapter_to_module primary key (id))
 ;
 
 create table course (
@@ -28,7 +30,7 @@ create table course (
 create table module (
   id                        bigint auto_increment not null,
   title                     varchar(255) not null,
-  content                   varchar(255) not null,
+  content                   longtext not null,
   constraint pk_module primary key (id))
 ;
 
