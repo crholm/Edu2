@@ -1,0 +1,86 @@
+<div class="container" >
+
+    <div class="row">
+        <div class="span12" >
+            <h1>{{ university.name }} &gt; {{ course.courseCode }}</h1>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="span3" >
+            <div class="">
+                <h2>{{ course.title }}</h2>
+
+
+                <accordion close-others="true">
+                    <accordion-group heading="{{section.title}}" ng-repeat="section in sections | orderBy:sectionOrder" style="margin-right: 15px">
+                        <ul>
+                            <li ng-repeat="chapter in section.chapters | orderBy:chapterOrder"><a href="" ng-click="showChapter(chapter, section)">{{ chapter.title }}</a></li>
+                        </ul>
+                    </accordion-group>
+                </accordion>
+
+
+            </div>
+
+        </div>
+
+        <div class="span9 " >
+            <div class="">
+                <h1>{{ currentChapter.title }} <a class="btn btn-primary" ng-click="saveCurrent()">Save!</a> </h1>
+
+                <accordion close-others="true">
+
+                        <span ng-repeat="module in currentModules | orderBy:'$order'">
+
+
+                            <accordion-group   style="margin-right: 15px">
+
+                                <accordion-heading>
+                                    <h3>{{ module.title }}</h3>
+                                </accordion-heading>
+
+                                <div class="btn-toolbar">
+
+                                    <div class="btn-group">
+                                        <a class="btn btn-mini" ng-click="decOrder(module)" ng-disabled="canNotDec(module)">Up</a>
+                                        <a class="btn btn-mini" ng-click="incOrder(module)" ng-disabled="canNotInc(module)">Down</a>
+                                    </div>
+                                </div>
+
+                                <div class="input-prepend">
+                                    <span class="add-on">Heading</span>
+                                    <input class="span8" id="prependedInput" type="text" ng-model="module.title" >
+                                </div>
+
+
+                                <textarea ui-tinymce="tinymceOptions" ng-model="module.content">Hello</textarea>
+
+                                <p></p>
+
+                                <p mathjax-bind="module.content"></p>
+
+
+
+
+
+
+                            </accordion-group>
+                        </span>
+
+
+
+
+                </accordion>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

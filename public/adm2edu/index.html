@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html ng-app="Edu2">
+<head>
+    <title>Edu2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="css/bootstrap2.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive2.css">
+    <link rel="stylesheet" href="css/style.css">
+
+
+
+</head>
+<body ng-controller="IndexCtrl">
+
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <button type="button" class="btn btn-navbar" ng-click="isCollapsed = !isCollapsed" >
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="#/">Edu2</a>
+            <div class="nav-collapse collapse" collapse="isCollapsed">
+                <ul class="nav">
+                    <li><a href="#/about">About</a></li>
+
+                </ul>
+
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+</div>
+
+<span ng-view></span>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax:{  inlineMath: [['$','$'], ['\\(','\\)']],
+               displayMath: [ ['$$','$$'], ['\[','\]'] ]
+
+            },
+    displayAlign: "left"
+    });
+</script>
+
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<!--<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script>-->
+<script src="js/tinymce/tinymce.min.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/ui-bootstrap-tpls-0.6.0.min.js"></script>
+<script src="js/ui-tinymce.js"></script>
+<script src="js/angular-resource-mod.js"></script>
+
+<script src="app/app.js"></script>
+<script src="app/routes.js"></script>
+<script src="app/static.js"></script>
+<script src="app/factories/rest-api.js"></script>
+<script src="app/directives/mathjax-directive.js"></script>
+
+<script src="app/controllers/index-ctrl.js"></script>
+<script src="app/controllers/university-ctrl.js"></script>
+<script src="app/controllers/course-ctrl.js"></script>
+
+
+
+</body>
+</html>

@@ -34,7 +34,7 @@
                 <accordion close-others="true">
 
 
-                        <accordion-group  ng-repeat="module in currentModules | orderBy:$order"  style="margin-right: 15px">
+                        <accordion-group  ng-repeat="module in currentModules | orderBy:'$order'"  style="margin-right: 15px">
 
                             <accordion-heading>
                                 <h3>{{ module.title }}</h3>

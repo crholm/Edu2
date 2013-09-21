@@ -27,17 +27,31 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
 
 
 
-    $scope.showChapter = function(chapter){
+    $scope.showChapter = function(chapter, section){
         $scope.currentChapter = chapter;
+        $scope.currentSection = section;
 
         $scope.currentModules = []
         for(var i = 0; i < chapter.modules.length; i++){
-            var module = Module.get({ id: chapter.modules[i].moduleId });
-            module.$order = chapter.modules[i].moduleOrder;
+            var module = Module.get({ id: chapter.modules[i].moduleId }, function(data){
+                $scope.setModuleOrder(data);
+            });
 
             $scope.currentModules.push(module);
         }
 
+        // console.log($scope.currentModules);
+    }
+
+
+    $scope.setModuleOrder = function(module){
+        for(var i = 0; i < $scope.currentChapter.modules.length; i++){
+            if(module.id == $scope.currentChapter.modules[i].moduleId){
+                module.$order = $scope.currentChapter.modules[i].moduleOrder;
+                break;
+            }
+
+        }
     }
 
 
