@@ -15,9 +15,9 @@
 
 
                 <accordion close-others="true">
-                    <accordion-group heading="{{section.title}}" ng-repeat="section in sections | orderBy:sectionOrder" style="margin-right: 15px">
+                    <accordion-group heading="{{section.title}}" ng-repeat="section in sections | orderBy:'sectionOrder'" style="margin-right: 15px">
                         <ul>
-                            <li ng-repeat="chapter in section.chapters | orderBy:chapterOrder"><a href="" ng-click="showChapter(chapter)">{{ chapter.title }}</a></li>
+                            <li ng-repeat="chapter in section.chapters | orderBy:'chapterOrder'"><a href="" ng-click="showChapter(chapter)">{{ chapter.title }}</a></li>
                         </ul>
                     </accordion-group>
                 </accordion>

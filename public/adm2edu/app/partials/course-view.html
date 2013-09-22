@@ -15,12 +15,34 @@
 
 
                 <accordion close-others="true">
-                    <accordion-group heading="{{section.title}}" ng-repeat="section in sections | orderBy:sectionOrder" style="margin-right: 15px">
-                        <ul>
-                            <li ng-repeat="chapter in section.chapters | orderBy:chapterOrder"><a href="" ng-click="showChapter(chapter, section)">{{ chapter.title }}</a></li>
-                        </ul>
+                    <accordion-group  ng-repeat="section in sections | orderBy:'sectionOrder'" style="margin-right: 15px">
+                        <accordion-heading>
+                            <input  type="text" ng-model="section.title" ui-blur="updateSection(section)">
+                            <span class="btn-group" style="margin-top: -15px">
+                                    <a class="btn btn-mini btn-primary" ng-click="decOrderSection(section)" ng-disabled="isUpSectionDisable(section)" >Up</a>
+                                    <a class="btn btn-mini btn-primary" ng-click="incOrderSection(section)" ng-disabled="isDownSectionDisable(section)">Down</a>
+                            </span>
+                        </accordion-heading>
+
+
+                            <div ng-repeat="chapter in section.chapters | orderBy:'chapterOrder'">
+                                <p ng-click="showChapter(chapter, section)">
+
+                                    <input type="text"  ng-model="chapter.title" class="span2" ui-blur="updateSection(section)">
+                                </p>
+                                <span class="btn-group" style="margin-top: -35px">
+                                    <a class="btn btn-mini btn-success" ng-click="decOrderChapter(chapter, section)" ng-disabled="isUpChapterDisable(chapter, section)">Up</a>
+                                    <a class="btn btn-mini btn-success" ng-click="incOrderChapter(chapter, section)" ng-disabled="isDownChapterDisable(chapter, section)" >Down</a>
+                                </span>
+
+
+
+                            </div>
+                            <a class="btn btn-mini" ng-click="addChapter(section)" >Add</a>
+
                     </accordion-group>
                 </accordion>
+                <a class="btn btn-small" ng-click="addSection()" >Add</a>
 
 
             </div>
@@ -31,10 +53,23 @@
             <div class="">
                 <h1>{{ currentChapter.title }} <a class="btn btn-primary" ng-click="saveCurrent()">Save!</a> </h1>
 
+                <div>
+                    <label for="fileToUpload">Select a File to Upload</label>
+                    <input type="file" ng-model-instant id="fileToUpload" multiple onchange="angular.element(this).scope().setFiles(this)" />
+                    <input type="button" ng-click="uploadFile()" value="Upload" />
+                </div>
+
+                <progress percent="progress" class="progress-bar active">{{progress}}%</progress>
+
+                <div ng-repeat="file in uploadedFiles">
+                    <a ng-href="{{ file }}" target="_blank"> {{ file }} </a>
+                </div>
+
+
+
                 <accordion close-others="true">
 
                         <span ng-repeat="module in currentModules | orderBy:'$order'">
-
 
                             <accordion-group   style="margin-right: 15px">
 
@@ -74,6 +109,8 @@
 
 
                 </accordion>
+
+                <a ng-disabled="isModuleAddDisable()"  ng-click="addModule()" class="btn" >Add</a>
 
 
 

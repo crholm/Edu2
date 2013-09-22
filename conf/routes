@@ -42,6 +42,10 @@ PUT           /api/university/:universityId/course/:courseId/section/:sectionId/
 DELETE        /api/university/:universityId/course/:courseId/section/:sectionId/chapter/:chapterId        controllers.ChapterApi.delete(universityId: Long, courseId: Long, sectionId: Long, chapterId: Long)
 
 
+GET           /api/media/:fileName                                                                        controllers.MediaApi.find(fileName: String)
+POST          /api/media                                                                                  controllers.MediaApi.save()
+
+
 
 
 # Map static resources from the /public folder to the /assets URL path
