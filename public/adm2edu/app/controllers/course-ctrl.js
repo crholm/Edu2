@@ -1,4 +1,51 @@
-Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University, Course, Section, Module) {
+Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University, Course, Section, Module, $q) {
+
+    function SaveQueue(){
+        this.toSaveQueue = [];
+        this.toSaveKeyQueue = [];
+        this.promise = NL.promise();
+
+        function push(key, func){
+            if(this.toSaveKeyQueue.indexOf(key) == -1){
+                this.toSaveKeyQueue.push(key);
+                this.toSaveQueue.push(func);
+            }
+        }
+
+        function exec(){
+            $scope.savingText = "Saving ..."
+            for(var i = 0; i < this.toSaveQueue.length; i++){
+                this.promise.then(function(){
+                    var key = saveQueue.toSaveKeyQueue.shift();
+                    var item = saveQueue.toSaveQueue.shift();
+                    item(key);
+                });
+            }
+
+            this.promise
+                .then(function(){
+                    $scope.savingText = "Save All Changes"
+                    this.promise = NL.promise();
+                }).start();
+
+
+        }
+
+        function isEmpty(){
+            return this.toSaveQueue.length == 0;
+        }
+
+
+        this.exec = exec;
+        this.push = push;
+        this.isEmpty = isEmpty;
+    }
+
+    var saveQueue = new SaveQueue();
+
+
+
+    $scope.savingText = "Save All Changes"
 
     $scope.tinymceOptions = {
         plugins: "image"
@@ -20,23 +67,42 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
     $scope.sections = Section.query({courseId: $routeParams.courseId, universityId: $routeParams.universityId });
 
 
+    $scope.saveButtonClass = function(){
+        if($scope.savingText == "Saving ..."){
+            return "btn-success";
+        }
+        return "btn-primary";
+    }
 
     $scope.isModuleAddDisable = function(){
         return typeof $scope.currentChapter.id == 'undefined';
     }
 
+
     $scope.updateSection = function(section){
-        section.$update({courseId: $routeParams.courseId, universityId: $routeParams.universityId});
+
+        saveQueue.push(section, function(section){
+           return section.$update({courseId: $routeParams.courseId, universityId: $routeParams.universityId}, saveQueue.promise.getNext());
+        });
     }
 
+    $scope.updateModule = function(module){
 
-    $scope.saveCurrent = function(){
-        $scope.updateSection($scope.currentSection);
-
-        for(var key in $scope.currentModules){
-            $scope.currentModules[key].$update();
-        }
+        saveQueue.push(module, function(module){
+            return module.$update(saveQueue.promise.getNext());
+        });
     }
+
+//////////////////////////
+
+    $scope.hasNoChangesToSave = function(){
+        return saveQueue.isEmpty() ||  $scope.savingText != "Save All Changes";
+    }
+
+    $scope.saveChanges = function(){
+        saveQueue.exec();
+    }
+
 
 
     $scope.addSection = function(){
@@ -47,7 +113,10 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
 
         $scope.sections.push(section);
 
-        section.$save({courseId: $routeParams.courseId, universityId: $routeParams.universityId });
+
+        saveQueue.push(section, function(section){
+            return section.$save({courseId: $routeParams.courseId, universityId: $routeParams.universityId }, saveQueue.promise.getNext());
+        });
 
     }
 
@@ -65,8 +134,6 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
         section.chapters.push(chapter);
 
         $scope.updateSection(section)
-
-
     }
 
 
@@ -86,10 +153,11 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
             $scope.currentChapter.modules.push(linkModule);
 
             $scope.updateSection($scope.currentSection)
+            $scope.currentModules.push(module);
 
         });
 
-        $scope.currentModules.push(module);
+
 
     }
 
@@ -99,13 +167,15 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
         $scope.currentChapter = chapter;
         $scope.currentSection = section;
 
-        $scope.currentModules = []
+        $scope.currentModules = [];
+
         for(var i = 0; i < chapter.modules.length; i++){
-            var module = Module.get({ id: chapter.modules[i].moduleId }, function(data){
+            Module.get({ id: chapter.modules[i].moduleId }, function(data){
                 $scope.setModuleOrder(data);
+                $scope.currentModules.push(data);
             });
 
-            $scope.currentModules.push(module);
+
         }
 
        // console.log($scope.currentModules);
@@ -261,6 +331,8 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
         }
         module.$order++;
 
+        $scope.updateSection($scope.currentSection);
+
         console.log("---");
         console.log(module);
         console.log($scope.currentChapter);
@@ -284,6 +356,8 @@ Edu2Ctrls.controller('CourseCtrl',  function ( $scope, $routeParams, University,
 
         }
         module.$order--;
+
+        $scope.updateSection($scope.currentSection);
     }
 
 

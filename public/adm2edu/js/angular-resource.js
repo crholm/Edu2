@@ -5,7 +5,7 @@
  */
 (function(window, angular, undefined) {'use strict';
 
-    var $resourceMinErr = angular.$$minErr('$resource');
+   // var $resourceMinErr = angular.$$minErr('$resource');
 
     /**
      * @ngdoc overview

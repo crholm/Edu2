@@ -2,7 +2,9 @@
 
     <div class="row">
         <div class="span12" >
-            <h1>{{ university.name }} &gt; {{ course.courseCode }}</h1>
+            <h1>{{ university.name }} &gt; {{ course.courseCode }}
+                <a class="btn " ng-class="saveButtonClass()" ng-click="saveChanges()" ng-disabled="hasNoChangesToSave()">{{ savingText }}</a>
+            </h1>
 
         </div>
 
@@ -11,13 +13,13 @@
     <div class="row">
         <div class="span3" >
             <div class="">
-                <h2>{{ course.title }}</h2>
+                <h2>{{ course.title }} </h2>
 
 
                 <accordion close-others="true">
                     <accordion-group  ng-repeat="section in sections | orderBy:'sectionOrder'" style="margin-right: 15px">
                         <accordion-heading>
-                            <input  type="text" ng-model="section.title" ui-blur="updateSection(section)">
+                            <input  type="text" ng-model="section.title" ng-change="updateSection(section)">
                             <span class="btn-group" style="margin-top: -15px">
                                     <a class="btn btn-mini btn-primary" ng-click="decOrderSection(section)" ng-disabled="isUpSectionDisable(section)" >Up</a>
                                     <a class="btn btn-mini btn-primary" ng-click="incOrderSection(section)" ng-disabled="isDownSectionDisable(section)">Down</a>
@@ -28,7 +30,7 @@
                             <div ng-repeat="chapter in section.chapters | orderBy:'chapterOrder'">
                                 <p ng-click="showChapter(chapter, section)">
 
-                                    <input type="text"  ng-model="chapter.title" class="span2" ui-blur="updateSection(section)">
+                                    <input type="text"  ng-model="chapter.title" class="span2" ng-change="updateSection(section)">
                                 </p>
                                 <span class="btn-group" style="margin-top: -35px">
                                     <a class="btn btn-mini btn-success" ng-click="decOrderChapter(chapter, section)" ng-disabled="isUpChapterDisable(chapter, section)">Up</a>
@@ -51,7 +53,7 @@
 
         <div class="span9 " >
             <div class="">
-                <h1>{{ currentChapter.title }} <a class="btn btn-primary" ng-click="saveCurrent()">Save!</a> </h1>
+                <h1>{{ currentChapter.title }}</h1>
 
                 <div>
                     <label for="fileToUpload">Select a File to Upload</label>
@@ -91,7 +93,7 @@
                                 </div>
 
 
-                                <textarea ui-tinymce="tinymceOptions" ng-model="module.content">Hello</textarea>
+                                <textarea ui-tinymce="tinymceOptions" ng-model="module.content" ng-change="updateModule(module)"></textarea>
 
                                 <p></p>
 
