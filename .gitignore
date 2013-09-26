@@ -20,4 +20,4 @@ test-result
 server.pid
 *.iml
 *.eml
-!public/img/lib
+!**/img/lib
